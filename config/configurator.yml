@@ -1,0 +1,67 @@
+---
+configurator:
+  on_launch:
+    manager: reload_configuration
+  on_update:
+    manager: reload_service
+  apis:
+    retrieve_scheme:
+    refresh_schemes:
+  service:
+    request:
+      timeout: 5
+    response:
+      result:
+        code: { type: string }
+        message: { type: string }
+        data: { required: false }
+    apis:
+      retrieve_scheme:
+        request:
+          path: retrieve
+          method: get
+          parameters:
+            type: { type: string }
+            name: { type: string }
+            config_id: { type: string, required: false }
+            signature: { type: string, required: false }
+            deserialize_config: { type: bool, default: false, required: false }
+            dotted_path: { type: bool, default: false, required: false }
+        response:
+          result:
+            data:
+              schema_inline: &scheme_object
+                id: { type: string }
+                type: { type: string }
+                name: { type: string }
+                updated_at: { type: datetime }
+                config:
+                  schema:
+                    id: { type: string }
+                    serializer: { type: string }
+                    algorithm: { type: string }
+                    signature: { type: string }
+                    data:
+                    created_at: { type: datetime }
+      refresh_schemes:
+        request:
+          path: refresh
+          method: post
+          parameters:
+            type: { type: string }
+            base:
+              schema:
+                name: { type: string }
+                config_id: { type: string }
+              default: []
+              array: true
+            deserialize_config: { type: bool, default: false, required: false }
+            dotted_path: { type: bool, default: false, required: false }
+        response:
+          result:
+            data:
+              schema_inline:
+                update:
+                  schema: *scheme_object
+                  array: true
+                remove: { type: string, array: true }
