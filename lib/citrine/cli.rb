@@ -122,7 +122,7 @@ module Citrine
         options[:source_files] << source_file
       end
       parser.on("-v", "--version", "Show version") do
-        puts "Version: #{VERSION}"
+        puts "Version: #{get_constant("VERSION")}"
         exit
       end
       parser.on("-h", "--help", "Show this message") do
