@@ -64,7 +64,7 @@ module Citrine
     def run_migration(repository, opts = {})
       actor(repository).run_migration(**opts)
     rescue => e
-      error "Migration failed: #{e.class.name} - #{e.message}"
+      error "Migration failed - #{actor(repository).options[:database]}: #{e.class.name} - #{e.message}"
     end
   end
 end
