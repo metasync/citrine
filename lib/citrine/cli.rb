@@ -121,6 +121,10 @@ module Citrine
         "Source code file(s) in YAML") do |source_file|
         options[:source_files] << source_file
       end
+      parser.on("-v", "--version", "Show version") do
+        puts "Version: #{VERSION}"
+        exit
+      end
       parser.on("-h", "--help", "Show this message") do
         puts parser
         exit
