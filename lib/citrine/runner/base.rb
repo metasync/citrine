@@ -17,6 +17,7 @@ module Citrine
         when Hash
           add_jobs(
             jobs.inject([]) do |j, (name, opts)|
+              opts[:jobs] ||= []
               case opts[:jobs]
               when Hash
                 j.concat(opts[:jobs].each_with_object([]) { |(id, job), jobs|
@@ -27,7 +28,7 @@ module Citrine
                   {name: name}.merge!(opts[:general] || {}).deep_merge!(job)
                 })
               else
-                raise ArgumentError, "Invalid jobs: #{jobs.inspect}"
+                raise ArgumentError, "Invalid jobs - #{name}: #{opts[:jobs].inspect}"
               end
             end
           )
