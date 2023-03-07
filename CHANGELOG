@@ -8,14 +8,9 @@
 
   * Minor clean up
 
-## [0.1.2] - 2023-03-07
+## [0.1.5] - 2023-03-07
 
   * Minor touch up on error messages for migration failure
-
-## [0.1.3] - 2023-03-07
-
   * Added option -v for Citrine CLI to show version number
-
-## [0.1.4] - 2023-03-07
-
   * Fixed a bug in adding jobs when jobs are undefined
+  * Fixed a bug in showing version
