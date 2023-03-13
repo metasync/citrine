@@ -34,7 +34,9 @@ module Citrine
           actor(:migrator).start_migration(
             options[:migration_command],
             migration_dir: options[:system_migration_dir],
-            migration_table: options[:system_migration_table]
+            migration_table: options[:system_schema].nil? ?
+              options[:system_migration_table] : 
+              Sequel.qualify(options[:system_schema], options[:system_migration_table])
           )
         end
       else
