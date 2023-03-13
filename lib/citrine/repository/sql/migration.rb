@@ -55,7 +55,7 @@ module Citrine
         end
 
         def init_migration_table
-          (options[:migration_table] || default_migration_table)&.to_sym
+          (options[:migration_table] || default_migration_table)
         end
 
         def step(step)
